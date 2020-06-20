@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 {
     class BankAccount
     {
+
         // parameterless chained constructor
         public BankAccount() : this("", 0, 0.0M) { }
         // overloaded constructor
@@ -39,26 +40,31 @@ using System.Threading.Tasks;
             set { _savingsAccountBalance = value; } 
         }
         private decimal _savingsAccountBalance; // Balance backing field
-    
+
+       
+        
         // virtual function Deposit
         public virtual void Deposit(decimal deposit)
         {
-            Balance =+ deposit;
-            //return Balance; 
+            Balance += deposit;
+            
         }
+        
         // virtual function Withdraw
-        public virtual void Withdraw(decimal withdrawl)
+        public virtual void Withdraw(decimal withdraw)
         {
-            Balance =+ withdrawl;
-            //return Balance;
+            if (Balance - withdraw >= 0)
+                Balance -= withdraw;
+            else
+                throw new WithrawlExceptionHandle();
         }
 
         public override string ToString()
         {
             
-            return "\nSavings Acct: " + Name + 
-                " " + AccountNum + " " + Balance;
-        }
+            return "Name: "+ Name + "\r\nSavings Acct: " +  
+                " " + AccountNum + "\r\nBalance: " + Balance.ToString("C");
+        } 
     }
    
 

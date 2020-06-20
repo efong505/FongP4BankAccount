@@ -35,6 +35,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.accountTab = new System.Windows.Forms.TabPage();
+            this.IncorrectEntry = new System.Windows.Forms.Label();
+            this.correctEntryStatus = new System.Windows.Forms.Label();
+            this.txtAccountNum = new System.Windows.Forms.TextBox();
+            this.lblAcctNum = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.txtBInterstRate = new System.Windows.Forms.TextBox();
             this.txtBATMPin = new System.Windows.Forms.TextBox();
@@ -47,7 +51,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.DepositWithdrawTab = new System.Windows.Forms.TabPage();
-            this.txtBTransactions = new System.Windows.Forms.TextBox();
+            this.lstBTransactions = new System.Windows.Forms.ListBox();
+            this.btnClear = new System.Windows.Forms.Button();
             this.btnProcessTrans = new System.Windows.Forms.Button();
             this.rdBWithdraw = new System.Windows.Forms.RadioButton();
             this.rdBDeposit = new System.Windows.Forms.RadioButton();
@@ -55,11 +60,6 @@
             this.txtBAmount = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.lblAcctNum = new System.Windows.Forms.Label();
-            this.txtAccountNum = new System.Windows.Forms.TextBox();
-            this.correctEntryStatus = new System.Windows.Forms.Label();
-            this.IncorrectEntry = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.welcomeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -146,6 +146,48 @@
             this.accountTab.TabIndex = 1;
             this.accountTab.Text = "Account";
             this.accountTab.UseVisualStyleBackColor = true;
+            // 
+            // IncorrectEntry
+            // 
+            this.IncorrectEntry.AutoSize = true;
+            this.IncorrectEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IncorrectEntry.ForeColor = System.Drawing.Color.Red;
+            this.IncorrectEntry.Location = new System.Drawing.Point(181, 337);
+            this.IncorrectEntry.Name = "IncorrectEntry";
+            this.IncorrectEntry.Size = new System.Drawing.Size(0, 13);
+            this.IncorrectEntry.TabIndex = 13;
+            this.IncorrectEntry.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.IncorrectEntry.Visible = false;
+            // 
+            // correctEntryStatus
+            // 
+            this.correctEntryStatus.AutoSize = true;
+            this.correctEntryStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.correctEntryStatus.ForeColor = System.Drawing.Color.ForestGreen;
+            this.correctEntryStatus.Location = new System.Drawing.Point(166, 336);
+            this.correctEntryStatus.Name = "correctEntryStatus";
+            this.correctEntryStatus.Size = new System.Drawing.Size(0, 13);
+            this.correctEntryStatus.TabIndex = 12;
+            this.correctEntryStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.correctEntryStatus.Visible = false;
+            // 
+            // txtAccountNum
+            // 
+            this.txtAccountNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAccountNum.Location = new System.Drawing.Point(278, 115);
+            this.txtAccountNum.Name = "txtAccountNum";
+            this.txtAccountNum.Size = new System.Drawing.Size(213, 26);
+            this.txtAccountNum.TabIndex = 2;
+            // 
+            // lblAcctNum
+            // 
+            this.lblAcctNum.AutoSize = true;
+            this.lblAcctNum.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAcctNum.Location = new System.Drawing.Point(44, 119);
+            this.lblAcctNum.Name = "lblAcctNum";
+            this.lblAcctNum.Size = new System.Drawing.Size(107, 18);
+            this.lblAcctNum.TabIndex = 11;
+            this.lblAcctNum.Text = "Account Num";
             // 
             // btnUpdate
             // 
@@ -263,8 +305,8 @@
             // 
             // DepositWithdrawTab
             // 
+            this.DepositWithdrawTab.Controls.Add(this.lstBTransactions);
             this.DepositWithdrawTab.Controls.Add(this.btnClear);
-            this.DepositWithdrawTab.Controls.Add(this.txtBTransactions);
             this.DepositWithdrawTab.Controls.Add(this.btnProcessTrans);
             this.DepositWithdrawTab.Controls.Add(this.rdBWithdraw);
             this.DepositWithdrawTab.Controls.Add(this.rdBDeposit);
@@ -280,15 +322,24 @@
             this.DepositWithdrawTab.Text = "Deposit/Withdraw";
             this.DepositWithdrawTab.UseVisualStyleBackColor = true;
             // 
-            // txtBTransactions
+            // lstBTransactions
             // 
-            this.txtBTransactions.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.txtBTransactions.Location = new System.Drawing.Point(367, 6);
-            this.txtBTransactions.Multiline = true;
-            this.txtBTransactions.Name = "txtBTransactions";
-            this.txtBTransactions.ReadOnly = true;
-            this.txtBTransactions.Size = new System.Drawing.Size(305, 406);
-            this.txtBTransactions.TabIndex = 7;
+            this.lstBTransactions.FormattingEnabled = true;
+            this.lstBTransactions.Location = new System.Drawing.Point(367, 6);
+            this.lstBTransactions.Name = "lstBTransactions";
+            this.lstBTransactions.Size = new System.Drawing.Size(305, 407);
+            this.lstBTransactions.TabIndex = 9;
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.Location = new System.Drawing.Point(175, 362);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(118, 26);
+            this.btnClear.TabIndex = 8;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnProcessTrans
             // 
@@ -329,11 +380,11 @@
             // txtResults
             // 
             this.txtResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResults.Location = new System.Drawing.Point(116, 186);
+            this.txtResults.Location = new System.Drawing.Point(116, 178);
             this.txtResults.Multiline = true;
             this.txtResults.Name = "txtResults";
             this.txtResults.ReadOnly = true;
-            this.txtResults.Size = new System.Drawing.Size(230, 99);
+            this.txtResults.Size = new System.Drawing.Size(230, 164);
             this.txtResults.TabIndex = 3;
             // 
             // txtBAmount
@@ -348,7 +399,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(37, 190);
+            this.label9.Location = new System.Drawing.Point(37, 182);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(62, 18);
             this.label9.TabIndex = 1;
@@ -363,59 +414,6 @@
             this.label8.Size = new System.Drawing.Size(66, 18);
             this.label8.TabIndex = 0;
             this.label8.Text = "Amount";
-            // 
-            // btnClear
-            // 
-            this.btnClear.BackColor = System.Drawing.Color.Transparent;
-            this.btnClear.Location = new System.Drawing.Point(170, 305);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(118, 26);
-            this.btnClear.TabIndex = 8;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // lblAcctNum
-            // 
-            this.lblAcctNum.AutoSize = true;
-            this.lblAcctNum.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAcctNum.Location = new System.Drawing.Point(44, 119);
-            this.lblAcctNum.Name = "lblAcctNum";
-            this.lblAcctNum.Size = new System.Drawing.Size(107, 18);
-            this.lblAcctNum.TabIndex = 11;
-            this.lblAcctNum.Text = "Account Num";
-            // 
-            // txtAccountNum
-            // 
-            this.txtAccountNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAccountNum.Location = new System.Drawing.Point(278, 115);
-            this.txtAccountNum.Name = "txtAccountNum";
-            this.txtAccountNum.Size = new System.Drawing.Size(213, 26);
-            this.txtAccountNum.TabIndex = 2;
-            // 
-            // correctEntryStatus
-            // 
-            this.correctEntryStatus.AutoSize = true;
-            this.correctEntryStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.correctEntryStatus.ForeColor = System.Drawing.Color.ForestGreen;
-            this.correctEntryStatus.Location = new System.Drawing.Point(166, 336);
-            this.correctEntryStatus.Name = "correctEntryStatus";
-            this.correctEntryStatus.Size = new System.Drawing.Size(0, 13);
-            this.correctEntryStatus.TabIndex = 12;
-            this.correctEntryStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.correctEntryStatus.Visible = false;
-            // 
-            // IncorrectEntry
-            // 
-            this.IncorrectEntry.AutoSize = true;
-            this.IncorrectEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IncorrectEntry.ForeColor = System.Drawing.Color.Red;
-            this.IncorrectEntry.Location = new System.Drawing.Point(181, 337);
-            this.IncorrectEntry.Name = "IncorrectEntry";
-            this.IncorrectEntry.Size = new System.Drawing.Size(0, 13);
-            this.IncorrectEntry.TabIndex = 13;
-            this.IncorrectEntry.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.IncorrectEntry.Visible = false;
             // 
             // BankAccountForm
             // 
@@ -458,7 +456,6 @@
         private System.Windows.Forms.TextBox txtBATMAcctNum;
         private System.Windows.Forms.TextBox txtBName;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.TextBox txtBTransactions;
         private System.Windows.Forms.Button btnProcessTrans;
         private System.Windows.Forms.RadioButton rdBWithdraw;
         private System.Windows.Forms.RadioButton rdBDeposit;
@@ -471,6 +468,7 @@
         private System.Windows.Forms.Label lblAcctNum;
         private System.Windows.Forms.Label IncorrectEntry;
         private System.Windows.Forms.Label correctEntryStatus;
+        private System.Windows.Forms.ListBox lstBTransactions;
     }
 }
 

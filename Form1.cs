@@ -5,13 +5,26 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//TODO: Add limit of withdrawl if balance not available
+//TODO: Display message that insufficient funds to make withdrawl transaction
+//TODO: Calculate interest into balance
 namespace FongP4BankAccount
 {
     public partial class BankAccountForm : Form
     {
+        // Success message for account page
+        readonly string successMess = "Great! Thanks, Please proceed to Deposit/Withdraw Tab";
+
+        // Error message for popup
+        readonly string errorPopUp = "You've entered an invalid number type. \r\nPlease try again.";
+
+        // Error Message text
+        readonly string errorText = "ERROR!!! You have entered in invalid response above";
+
         // Bank account array to hold 3 account types
         BankAccount[] bankAccount = new BankAccount[3];
         
@@ -29,7 +42,7 @@ namespace FongP4BankAccount
             SilverBankAccount silver = new SilverBankAccount("silverAcctOwner",
                 201, 1500.00M, 12345, 2345);
             GoldBankAccount gold = new GoldBankAccount("goldAcctOwner",
-                301, 25000.00M, 34567, 3210, .05M);
+                301, 25000.00M, 34567, 3210, 5M);
             
             // Place objects in bankAccount array
             bankAccount[0] = savings;
@@ -58,20 +71,20 @@ namespace FongP4BankAccount
                         // message to proceed
                         IncorrectEntry.Text = "";
                         IncorrectEntry.Visible = false;
-                        correctEntryStatus.Text = "Great! Thanks, Please proceed to Deposit/Withdraw Tab";
+                        correctEntryStatus.Text = successMess;
                         correctEntryStatus.Visible = true;
                     }
                     // if incorrect display error message in popup
                     else
                     {
                         // error message 
-                        IncorrectEntry.Text = "ERROR!!! You have entered in invalid response above";
+                        IncorrectEntry.Text = errorText;
                         IncorrectEntry.Visible = true;
                         correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
-                        MessageBox.Show("You've entered an invalid number type. \r\nPlease try again.",
+                        MessageBox.Show(errorPopUp,
                         "Invalid Number",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation,
@@ -86,19 +99,28 @@ namespace FongP4BankAccount
                     bankAccount[1].Name = txtBName.Text;
 
                     // Strings of numbers from text box fields
-                    accountNum = txtAccountNum.Text;
+                   
                     string atmAccountNum = txtBATMAcctNum.Text;
                     string atmPin = txtBATMPin.Text;
-                    //string intRte = txtBInterstRate.Text;
+                    
+                    
+                   
 
                     // Checks for TryParse
-                    acctNum = Int32.TryParse(accountNum, out accountNumber);
                     bool atmAcctNum = Int32.TryParse(atmAccountNum, out int atmAccountNumber);
                     bool ATMPin = Int32.TryParse(atmPin, out int atmPinNum);
                    // bool intRate = Decimal.TryParse(intRte, out Decimal interestRate);
 
-                    if (acctNum && atmAcctNum && ATMPin)
-                    { 
+                    if (atmAcctNum && ATMPin)
+                    {
+                        // Concatinate atmAccountNum and ATM Pin
+                        accountNum = atmAccountNum + atmPin;
+                        Int32.TryParse(accountNum, out accountNumber);
+
+
+                        txtAccountNum.Text = accountNum;
+                       
+
                         bankAccount[1].AccountNum = accountNumber;
                         ((SilverBankAccount)bankAccount[1]).ATMAccountNum = atmAccountNumber;
                         ((SilverBankAccount)bankAccount[1]).Pin = atmPinNum;
@@ -106,45 +128,50 @@ namespace FongP4BankAccount
                         // message on status of entries made
                         IncorrectEntry.Text = "";
                         IncorrectEntry.Visible = false;
-                        correctEntryStatus.Text = "Great! Thanks, Please proceed to Deposit/Withdraw Tab";
+                        correctEntryStatus.Text = successMess;
                         correctEntryStatus.Visible = true;
                     }
                     else
                     {
                         // message if incorrect entries
-                        IncorrectEntry.Text = "ERROR!!! You have entered in invalid response above";
+                        IncorrectEntry.Text = errorText;
                         IncorrectEntry.Visible = true;
                         correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
-                        MessageBox.Show("You've entered an invalid number type. \r\nPlease try again.",
+                        MessageBox.Show(errorPopUp,
                         "Invalid Number",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation,
                         MessageBoxDefaultButton.Button1);
                     }
-
-
                     break;
-                case "GoldAcct":
+  
+            case "GoldAcct":
                     // Name of customer
                     bankAccount[2].Name = txtBName.Text;
 
                     // Strings of numbers from text box fields
-                    accountNum = txtAccountNum.Text;
+                    
                     atmAccountNum = txtBATMAcctNum.Text;
                     atmPin = txtBATMPin.Text;
                     string intRte = txtBInterstRate.Text;
 
-                    // Checks for TryParse
-                    acctNum = Int32.TryParse(accountNum, out accountNumber);
+                    
                     atmAcctNum = Int32.TryParse(atmAccountNum, out atmAccountNumber);
                     ATMPin = Int32.TryParse(atmPin, out atmPinNum);
                     bool intRate = Decimal.TryParse(intRte, out Decimal interestRate);
 
-                    if (acctNum && atmAcctNum && ATMPin && intRate)
-                    { 
+                    if (atmAcctNum && ATMPin && intRate)
+                    {
+                        
+                        // Concatinate atmAccountNum and ATM Pin
+                        txtAccountNum.Text = atmAccountNum + atmPin;
+                        accountNum = txtAccountNum.Text;
+                        // Checks for TryParse
+                        Int32.TryParse(accountNum, out accountNumber);
+
                         bankAccount[2].AccountNum = accountNumber;
                         ((GoldBankAccount)bankAccount[2]).ATMAccountNum = atmAccountNumber;
                         ((GoldBankAccount)bankAccount[2]).Pin = atmPinNum;
@@ -153,19 +180,19 @@ namespace FongP4BankAccount
                         // entries if entered correctly
                         IncorrectEntry.Text = "";
                         IncorrectEntry.Visible = false;
-                        correctEntryStatus.Text = "Great! Thanks, Please proceed to Deposit/Withdraw Tab";
+                        correctEntryStatus.Text = successMess;
                         correctEntryStatus.Visible = true;
                     }
                     else
                     {
                         //message if entries entered incorrectly
-                        IncorrectEntry.Text = "ERROR!!! You have entered in invalid response above";
+                        IncorrectEntry.Text = errorText;
                         IncorrectEntry.Visible = true;
                         correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
-                        MessageBox.Show("You've entered an invalid number type. \r\nPlease try again.",
+                        MessageBox.Show(errorPopUp,
                         "Invalid Number",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation,
@@ -176,20 +203,160 @@ namespace FongP4BankAccount
         }
 
         // event handler button click for processing transactions on transactions tab
-        private void btnProcessTrans_Click(object sender, EventArgs e)
+        protected void btnProcessTrans_Click(object sender, EventArgs e)
         {
-           
+            switch (comBAcctType.Text)
+            {
+                case "SavingAcct":
+
+                    string amount = txtBAmount.Text;
+                    // Check for TryParse
+                    bool amountCheck = Decimal.TryParse(amount, out decimal amountTrans);
+
+                    // if valid set account number to AccountNum property 
+                    if (amountCheck)
+                    {
+                       
+                        // check if deposit or withdrawl
+                        if(rdBDeposit.Checked)
+                        {
+                            bankAccount[0].Deposit(amountTrans);
+                            txtResults.Text = bankAccount[0].ToString();
+                            lstBTransactions.Items.Add("Deposited $" + amountTrans +
+                                " to account " + bankAccount[0].AccountNum);
+                        }
+                        else if(rdBWithdraw.Checked)
+                        {
+                            try 
+                            { 
+                            bankAccount[0].Withdraw(amountTrans);
+                            txtResults.Text = bankAccount[0].ToString();
+                            lstBTransactions.Items.Add("Withdrew $" + amountTrans +
+                                " from account " + bankAccount[0].AccountNum);
+                            }
+                            catch (Exception exc)
+                            {
+                                txtResults.Text = exc.Message;   
+                            }
+                        }
+                        
+                    }
+                    // if incorrect display error message in popup
+                    else
+                    {
+              
+                        // Popup that displays error message
+                        MessageBox.Show(errorPopUp,
+                        "Invalid Number",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button1);
+                    }
+                    break;
+
+                case "SilverAcct":
+                    amount = txtBAmount.Text;
+                    // Check for TryParse
+                    amountCheck = Decimal.TryParse(amount, out  amountTrans);
+
+                    // if valid set account number to AccountNum property 
+                    if (amountCheck)
+                    {
+                        // check if deposit or withdrawl
+                        if (rdBDeposit.Checked)
+                        {
+                            bankAccount[1].Deposit(amountTrans);
+                            txtResults.Text = bankAccount[1].ToString();
+                            lstBTransactions.Items.Add("Deposited $" + amountTrans +
+                                " to account " + bankAccount[1].AccountNum);
+                        }
+                        else if (rdBWithdraw.Checked)
+                        {
+                            try
+                            { 
+                                bankAccount[1].Withdraw(amountTrans);
+                                txtResults.Text = bankAccount[1].ToString();
+                                lstBTransactions.Items.Add("Withdrew $" + amountTrans +
+                                    " from account " + bankAccount[1].AccountNum);
+                            }
+                            catch (Exception exc)
+                            {
+                                txtResults.Text = exc.Message;
+                            }
+                        }
+
+                        // message displayed if entries are correct
+                        else
+                        {
+                            // Popup that displays error message
+                            MessageBox.Show(errorPopUp,
+                            "Invalid Number",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation,
+                            MessageBoxDefaultButton.Button1);
+                        }
+                       
+                    }
+                    break;
+
+                case "GoldAcct":
+
+                    amount = txtBAmount.Text;
+                    // Check for TryParse
+                    amountCheck = Decimal.TryParse(amount, out  amountTrans);
+
+                    // if valid set account number to AccountNum property 
+                    if (amountCheck)
+                    {
+                        // check if deposit or withdrawl
+                        if (rdBDeposit.Checked)
+                        {
+                            bankAccount[2].Deposit(amountTrans);
+                            txtResults.Text = bankAccount[2].ToString();
+                            lstBTransactions.Items.Add("Deposited $" + amountTrans +
+                                " to account " + bankAccount[2].AccountNum);
+                        }
+                        else if (rdBWithdraw.Checked)
+                        {
+                            try
+                            { 
+                                bankAccount[2].Withdraw(amountTrans);
+                                txtResults.Text = bankAccount[2].ToString();
+                                lstBTransactions.Items.Add("Withdrew $" + amountTrans +
+                                    " from account " + bankAccount[2].AccountNum);
+                            }
+                            catch (Exception exc)
+                            {
+                                txtResults.Text = exc.Message;
+                            }
+                        }
+
+                        // message displayed if entries are correct
+                        else
+                        {
+                            // Popup that displays error message
+                            MessageBox.Show(errorPopUp,
+                            "Invalid Number",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation,
+                            MessageBoxDefaultButton.Button1);
+                        }
+
+                    }
+                    break;
+            }
         }
 
         // Change state of account types - Hides fields and textboxes 
         // in correlation to it's account type
-        private void comBAcctType_SelectedIndexChanged(object sender, EventArgs e)
+        protected void comBAcctType_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (comBAcctType.Text)
             {
                 case "SavingAcct":
                     lblATMPin.Visible = false;
                     txtBATMPin.Visible = false;
+                    txtAccountNum.ReadOnly = false;
                     lblPercentRate.Visible = false;
                     txtBInterstRate.Visible = false;
                     lblATMAcctNum.Visible = false;
@@ -198,15 +365,18 @@ namespace FongP4BankAccount
                 case "SilverAcct":
                     lblATMAcctNum.Visible = true;
                     txtBATMAcctNum.Visible = true;
+                    txtAccountNum.Text = "";
+                    txtAccountNum.ReadOnly = true;
                     lblATMPin.Visible = true;
                     txtBATMPin.Visible = true;
                     lblPercentRate.Visible = false;
                     txtBInterstRate.Visible = false;
-
                     break;
                 case "GoldAcct":
                     lblATMAcctNum.Visible = true;
                     txtBATMAcctNum.Visible = true;
+                    txtAccountNum.Text = "";
+                    txtAccountNum.ReadOnly = true;
                     lblATMPin.Visible = true;
                     txtBATMPin.Visible = true;
                     lblPercentRate.Visible = true;
@@ -219,7 +389,7 @@ namespace FongP4BankAccount
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtBAmount.Text = "";
-            txtBTransactions.Text = "";
+            lstBTransactions.Items.Clear();
             txtResults.Text = "";
         }
     }

@@ -8,6 +8,10 @@ namespace FongP4BankAccount
 {
     class SilverBankAccount: BankAccount
     {
+        // Static FEES variables
+        public static decimal DEPOSIT_FEE = 1.00M;
+        public static decimal WITHDRAWL_FEE = 2.75M;
+
         public SilverBankAccount(string name, int accountNum, 
             decimal savingsAccountBalanace, int atmAccountNum, int pin) 
             :base(name,accountNum, savingsAccountBalanace)
@@ -33,7 +37,8 @@ namespace FongP4BankAccount
         {
             if(Balance < 1000)
             {
-                Balance += deposit + 1.00M;
+                Balance -= DEPOSIT_FEE;
+                Balance += deposit;
             }
             else
             {
@@ -41,15 +46,20 @@ namespace FongP4BankAccount
             }
         }
         //Overriden Withdrawl Method
-        public override void Withdraw(decimal withdrawl)
+        public override void Withdraw(decimal withdraw)
         {
-            Balance -= 2.50M;
-            Balance -= withdrawl;
+            if (Balance - withdraw - WITHDRAWL_FEE >= 0)
+            {
+                Balance -= WITHDRAWL_FEE;
+                Balance -= withdraw;
+            }
+            else
+                throw new WithrawlExceptionHandle();
         }
         // Overriden ToString() from BankAccount class w/ ATM Account Num
         public override string ToString()
         {
-            return "ATM: " + ATMAccountNum + "\n" + base.ToString();
+            return "ATM: " + ATMAccountNum + "\r\n" + base.ToString();
         }
     }
 }
