@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FongP4BankAccount.BankAccount">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAQAAAEAAgAgAQEAAAAAAAAAAAAAAAAACI=</HashCode>
+      <FileName>BankAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FongP4BankAccount.SilverBankAccount">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAQAAkAAACAAAEAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>SilverBankAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FongP4BankAccount.GoldBankAccount">
+    <Position X="5.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAACAEAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>GoldBankAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
