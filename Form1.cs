@@ -9,13 +9,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//TODO: Add limit of withdrawl if balance not available
-//TODO: Display message that insufficient funds to make withdrawl transaction
-//TODO: Calculate interest into balance
+
 namespace FongP4BankAccount
 {
     public partial class BankAccountForm : Form
     {
+        /// <summary>
+        /// readonly error string messages for popup and text error and success messages 
+        /// </summary>
         // Success message for account page
         readonly string successMess = "Great! Thanks, Please proceed to Deposit/Withdraw Tab";
 
@@ -25,14 +26,27 @@ namespace FongP4BankAccount
         // Error Message text
         readonly string errorText = "ERROR!!! You have entered in invalid response above";
 
+        /// <summary>
+        /// Bank account array to hold the 3 account types
+        /// </summary>
         // Bank account array to hold 3 account types
         BankAccount[] bankAccount = new BankAccount[3];
         
+        /// <summary>
+        /// form initializer
+        /// </summary>
         public BankAccountForm()
         { 
             InitializeComponent();
         }
 
+        /// <summary>
+        /// button update event handler that instantiates the 3 bank types
+        /// and handles the entries of the account data information from the user 
+        /// placing them into their properties and/or calls their appropriate methods
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         // Event handler for button update on account tab
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -44,6 +58,9 @@ namespace FongP4BankAccount
             GoldBankAccount gold = new GoldBankAccount("goldAcctOwner",
                 301, 25000.00M, 34567, 3210, 5M);
             
+            ///<summary>
+            ///place the bank account type objects into the 3 array locations
+            /// </summary>
             // Place objects in bankAccount array
             bankAccount[0] = savings;
             bankAccount[1] = silver;
@@ -52,7 +69,10 @@ namespace FongP4BankAccount
            
             // Strings of numbers from text box fields
             string accountNum = txtAccountNum.Text;
-
+            
+            ///<summary>Swithc that handles the combo box user choic to select the appropropriate 
+            ///bank account types. 
+            ///</summary>
             switch (comBAcctType.Text)
             {
                 case "SavingAcct":
@@ -201,7 +221,13 @@ namespace FongP4BankAccount
                     break;
             }
         }
-
+        /// <summary>
+        /// Handles the process of transaction process button handler. 
+        /// Calls the methods calculate transaction and places values into class properties
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        
         // event handler button click for processing transactions on transactions tab
         protected void btnProcessTrans_Click(object sender, EventArgs e)
         {
@@ -346,7 +372,16 @@ namespace FongP4BankAccount
                     break;
             }
         }
-
+        /// <summary>
+        /// Handles the combobox show and hide labels and text fields according to the users
+        /// choice of bank account types. 
+        /// </summary>
+        /// <remarks>
+        /// shows pin and atm account number for silver and interest label and text field for gold.
+        /// also hides the above when basic bank account is selected.
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         // Change state of account types - Hides fields and textboxes 
         // in correlation to it's account type
         protected void comBAcctType_SelectedIndexChanged(object sender, EventArgs e)
@@ -384,7 +419,11 @@ namespace FongP4BankAccount
                     break;
             }
         }
-
+        /// <summary>
+        /// Clears all fields on the deposit/withdraw tab
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         // Clear button event handler to clear fields on transaction tab
         private void btnClear_Click(object sender, EventArgs e)
         {

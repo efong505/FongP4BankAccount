@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,30 +9,31 @@ namespace FongP4BankAccount
 {
     class SilverBankAccount: BankAccount
     {
-        // Static FEES variables
-        public static decimal DEPOSIT_FEE = 1.00M;
-        public static decimal WITHDRAWL_FEE = 2.75M;
+        // constant FEES variables
+        protected const decimal DEPOSIT_FEE = 1.00M;
+        protected const decimal WITHDRAWL_FEE = 2.75M;
 
         public SilverBankAccount(string name, int accountNum, 
-            decimal savingsAccountBalanace, int atmAccountNum, int pin) 
-            :base(name,accountNum, savingsAccountBalanace)
+            decimal savingsAccountBalanace, int atmAccountNum, int pin)
+                : base(name, accountNum, savingsAccountBalanace)
         {
             ATMAccountNum = atmAccountNum;
             Pin = pin;
         }
         // atmAccountNum Properties
         public int ATMAccountNum 
-        { 
-            get=>_atmAccountNum;
+        {
+            get => _atmAccountNum;
             set { _atmAccountNum = value; } 
         }
         private int _atmAccountNum;// atmAccountNum backing field
         // pin properties
-        public int Pin { 
-            get=>_pin;
-            set {_pin = value; } 
+        public int Pin {
+            get => _pin;
+            set { _pin = value; }
         }
         private int _pin;// pin backing field
+
         // Overriden Deposit Method
         public override void Deposit(decimal deposit)
         {
