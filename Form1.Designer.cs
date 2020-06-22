@@ -198,7 +198,7 @@
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
             // 
             // txtBInterstRate
             // 
@@ -248,7 +248,7 @@
             this.comBAcctType.Size = new System.Drawing.Size(213, 28);
             this.comBAcctType.TabIndex = 0;
             this.comBAcctType.Text = "SavingAcct";
-            this.comBAcctType.SelectedIndexChanged += new System.EventHandler(this.comBAcctType_SelectedIndexChanged);
+            this.comBAcctType.SelectedIndexChanged += new System.EventHandler(this.ComBAcctType_SelectedIndexChanged);
             // 
             // lblPercentRate
             // 
@@ -339,7 +339,7 @@
             this.btnClear.TabIndex = 8;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // btnProcessTrans
             // 
@@ -351,7 +351,7 @@
             this.btnProcessTrans.TabIndex = 6;
             this.btnProcessTrans.Text = "Process Transaction";
             this.btnProcessTrans.UseVisualStyleBackColor = false;
-            this.btnProcessTrans.Click += new System.EventHandler(this.btnProcessTrans_Click);
+            this.btnProcessTrans.Click += new System.EventHandler(this.BtnProcessTrans_Click);
             // 
             // rdBWithdraw
             // 

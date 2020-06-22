@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace FongP4BankAccount
 {
+    /// <summary>
+    /// BankAccountForm inherits from <c>Form</c>
+    /// </summary>
     public partial class BankAccountForm : Form
     {
         /// <summary>
@@ -48,7 +51,7 @@ namespace FongP4BankAccount
         /// <param name="sender"></param>
         /// <param name="e"></param>
         // Event handler for button update on account tab
-        protected void btnUpdate_Click(object sender, EventArgs e)
+        protected void BtnUpdate_Click(object sender, EventArgs e)
         {
             // Create objects for each account type
             BankAccount savings = new BankAccount("bankAccountOwner",
@@ -229,7 +232,7 @@ namespace FongP4BankAccount
         /// <param name="e"></param>
         
         // event handler button click for processing transactions on transactions tab
-        protected void btnProcessTrans_Click(object sender, EventArgs e)
+        protected void BtnProcessTrans_Click(object sender, EventArgs e)
         {
             switch (comBAcctType.Text)
             {
@@ -384,7 +387,7 @@ namespace FongP4BankAccount
         /// <param name="e"></param>
         // Change state of account types - Hides fields and textboxes 
         // in correlation to it's account type
-        protected void comBAcctType_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ComBAcctType_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (comBAcctType.Text)
             {
@@ -425,7 +428,7 @@ namespace FongP4BankAccount
         /// <param name="sender"></param>
         /// <param name="e"></param>
         // Clear button event handler to clear fields on transaction tab
-        private void btnClear_Click(object sender, EventArgs e)
+        private void BtnClear_Click(object sender, EventArgs e)
         {
             txtBAmount.Text = "";
             lstBTransactions.Items.Clear();
