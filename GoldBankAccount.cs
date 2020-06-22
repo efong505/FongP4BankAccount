@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace FongP4BankAccount
 {
+    // The GoldBank Account Class that Inherits from the SilverBankAccount
     /// <summary>
     /// The GoldBank Account Class that Inherits from the SilverBankAccount
     /// </summary>
     class GoldBankAccount :SilverBankAccount
     {
+        // GoldBankAccount Constructor 
         /// <summary>
         /// GoldBankAccount constructor that inherits from the base class SilverBankAccount
         /// that includes everything from the base and the SilverBankAccount class but
@@ -29,10 +31,11 @@ namespace FongP4BankAccount
         {
             Interest = interest;
         }
+
+        // Interest property
         /// <summary>
         /// Interst property
         /// </summary>
-        // Interest property
         public decimal Interest {
             get => _interest;
             set 
@@ -45,12 +48,11 @@ namespace FongP4BankAccount
         }
         decimal _interest;// Interest backing field
 
+        // Deposit bool Property 
         /// <summary>
         /// DepositBool boolean checks if the transaction is a deposit or if it's a withdrawl.
         /// If the boolean returns true then it's a Deposit. False, it's a Withdrawl.
         /// </summary>
-        // Deposit bool Property if true then transaction is a deposit
-        // if false, withrawl is the transaction
         public bool DepositBool { get; set; }
 
         // Overriden Withdraw Method
@@ -85,6 +87,8 @@ namespace FongP4BankAccount
 
             }
         }
+
+        // Overriden Deposit Method
         /// <summary>
         /// Overriden Deposit method that adds interest to the account if the balance is equal to or greater
         /// than 5,000. If the balance is less than 5,000 then the depsosit fees are defaulted to the SilverBankAccount
@@ -105,6 +109,8 @@ namespace FongP4BankAccount
                 DepositBool = true;
             }
         }
+
+        // Overriden ToString()
         /// <summary>
         /// Overriden To String
         /// </summary>

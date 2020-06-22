@@ -31,6 +31,8 @@ namespace FongP4BankAccount
         // Error Message text
         readonly string errorText = "ERROR!!! You have entered in invalid response above";
 
+
+
         // Bank account array to hold 3 account types
         /// <summary>
         /// Bank account array to hold the 3 account types
@@ -54,60 +56,60 @@ namespace FongP4BankAccount
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
-            // Create objects for each account type
+            // set the success and error messages
+            correctEntryStatus.Text = successMess; // set success message into correct message label
+            IncorrectEntry.Text = errorText; // set error message into incorrect message lable
+
+            // Create object for BankAccount 
             BankAccount savings = new BankAccount("bankAccountOwner",
                 101, 500.00M);
+            // Create object for SilverBankAccount
             SilverBankAccount silver = new SilverBankAccount("silverAcctOwner",
                 201, 1500.00M, 12345, 2345);
+            // Create object for GoldBankAccount
             GoldBankAccount gold = new GoldBankAccount("goldAcctOwner",
                 301, 25000.00M, 34567, 3210, 5M);
             
-            ///<summary>
-            ///place the bank account type objects into the 3 array locations
-            /// </summary>
-            // Place objects in bankAccount array
+            // Place bank account objects in bankAccount array
             bankAccount[0] = savings;
             bankAccount[1] = silver;
             bankAccount[2] = gold;
 
-           
-            // Strings of numbers from text box fields
+            // Strings of account number from text box fields on Account Tab on form
             string accountNum = txtAccountNum.Text;
             
-            ///<summary>Swithc that handles the combo box user choic to select the appropropriate 
-            ///bank account types. 
-            ///</summary>
+            //Switch that handles the combo box user choice to 
+            // select the appropropriate bank account types. 
             switch (comBAcctType.Text)
             {
                 case "SavingAcct":
                     // Name of customer
                     bankAccount[0].Name = txtBName.Text;
                     
-                    // Check for TryParse
+                    // TryParse account number 
                     bool acctNum = Int32.TryParse(accountNum, out int accountNumber);
                     
-                    // if valid set account number to AccountNum property 
+                    // if valid, set account number to AccountNum property 
                     if (acctNum)
                     {
                         // message displayed if entries are correct
                         bankAccount[0].AccountNum = accountNumber;
                         
-                        // message to proceed
-                        IncorrectEntry.Text = "";
-                        IncorrectEntry.Visible = false;
-                        correctEntryStatus.Text = successMess;
-                        correctEntryStatus.Visible = true;
+                        // message if valid and instruction to proceed
+                        //IncorrectEntry.Text = ""; 
+                        IncorrectEntry.Visible = false; // hide the error message 
+                        //correctEntryStatus.Text = successMess; // set 
+                        correctEntryStatus.Visible = true; // Show the success message
                     }
                     // if incorrect display error message in popup
                     else
                     {
                         // error message 
-                        IncorrectEntry.Text = errorText;
+                        
                         IncorrectEntry.Visible = true;
-                        correctEntryStatus.Text = "";
+                       // correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
@@ -136,8 +138,7 @@ namespace FongP4BankAccount
                     // Checks for TryParse
                     bool atmAcctNum = Int32.TryParse(atmAccountNum, out int atmAccountNumber);
                     bool ATMPin = Int32.TryParse(atmPin, out int atmPinNum);
-                   // bool intRate = Decimal.TryParse(intRte, out Decimal interestRate);
-
+                    
                     if (atmAcctNum && ATMPin)
                     {
                         // Concatinate atmAccountNum and ATM Pin
@@ -153,17 +154,17 @@ namespace FongP4BankAccount
                         ((SilverBankAccount)bankAccount[1]).Pin = atmPinNum;
                         
                         // message on status of entries made
-                        IncorrectEntry.Text = "";
+                        //IncorrectEntry.Text = "";
                         IncorrectEntry.Visible = false;
-                        correctEntryStatus.Text = successMess;
+                        //correctEntryStatus.Text = successMess;
                         correctEntryStatus.Visible = true;
                     }
                     else
                     {
                         // message if incorrect entries
-                        IncorrectEntry.Text = errorText;
+                        //IncorrectEntry.Text = errorText;
                         IncorrectEntry.Visible = true;
-                        correctEntryStatus.Text = "";
+                        //correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
@@ -205,17 +206,17 @@ namespace FongP4BankAccount
                         ((GoldBankAccount)bankAccount[2]).Interest = interestRate;
                         
                         // entries if entered correctly
-                        IncorrectEntry.Text = "";
+                        //IncorrectEntry.Text = "";
                         IncorrectEntry.Visible = false;
-                        correctEntryStatus.Text = successMess;
+                        //correctEntryStatus.Text = successMess;
                         correctEntryStatus.Visible = true;
                     }
                     else
                     {
                         //message if entries entered incorrectly
-                        IncorrectEntry.Text = errorText;
+                        //IncorrectEntry.Text = errorText;
                         IncorrectEntry.Visible = true;
-                        correctEntryStatus.Text = "";
+                       // correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
@@ -228,14 +229,14 @@ namespace FongP4BankAccount
                     break;
             }
         }
+
+        // event handler button click for processing transactions on transactions tab
         /// <summary>
         /// Handles the process of transaction process button handler. 
         /// Calls the methods calculate transaction and places values into class properties
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
-        // event handler button click for processing transactions on transactions tab
         protected void BtnProcessTrans_Click(object sender, EventArgs e)
         {
             switch (comBAcctType.Text)
@@ -249,7 +250,6 @@ namespace FongP4BankAccount
                     // if valid set account number to AccountNum property 
                     if (amountCheck)
                     {
-                       
                         // check if deposit or withdrawl
                         if(rdBDeposit.Checked)
                         {
@@ -277,7 +277,8 @@ namespace FongP4BankAccount
                     // if incorrect display error message in popup
                     else
                     {
-              
+                        // text error message into results text box
+                        txtResults.Text = "Invalid Number Type";
                         // Popup that displays error message
                         MessageBox.Show(errorPopUp,
                         "Invalid Number",
@@ -317,18 +318,20 @@ namespace FongP4BankAccount
                                 txtResults.Text = exc.Message;
                             }
                         }
+                    }
+                    // if incorrect display error message in popup
+                    else
+                    {
 
-                        // message displayed if entries are correct
-                        else
-                        {
-                            // Popup that displays error message
-                            MessageBox.Show(errorPopUp,
-                            "Invalid Number",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation,
-                            MessageBoxDefaultButton.Button1);
-                        }
-                       
+                        // text error message into results text box
+                        txtResults.Text = "Invalid Number Type";
+
+                        // Popup that displays error message
+                        MessageBox.Show(errorPopUp,
+                        "Invalid Number",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button1);
                     }
                     break;
 
@@ -363,22 +366,28 @@ namespace FongP4BankAccount
                                 txtResults.Text = exc.Message;
                             }
                         }
+                    }
 
-                        // message displayed if entries are correct
-                        else
-                        {
-                            // Popup that displays error message
-                            MessageBox.Show(errorPopUp,
-                            "Invalid Number",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation,
-                            MessageBoxDefaultButton.Button1);
-                        }
+                    // if incorrect display error message in popup
+                    else
+                    {
 
+                        // text error message into results text box
+                        txtResults.Text = "Invalid Number Type";
+
+                        // Popup that displays error message
+                        MessageBox.Show(errorPopUp,
+                        "Invalid Number",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button1);
                     }
                     break;
             }
         }
+
+        // ComboBox - Change state of account types - Hides fields and textboxes 
+        // in correlation to it's account type
         /// <summary>
         /// Handles the combobox show and hide labels and text fields according to the users
         /// choice of bank account types. 
@@ -389,8 +398,6 @@ namespace FongP4BankAccount
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        // Change state of account types - Hides fields and textboxes 
-        // in correlation to it's account type
         protected void ComBAcctType_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (comBAcctType.Text)
@@ -426,12 +433,13 @@ namespace FongP4BankAccount
                     break;
             }
         }
+
+        // Clear button - event handler to clear fields on transaction tab
         /// <summary>
         /// Clears all fields on the deposit/withdraw tab
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        // Clear button event handler to clear fields on transaction tab
         private void BtnClear_Click(object sender, EventArgs e)
         {
             txtBAmount.Text = "";

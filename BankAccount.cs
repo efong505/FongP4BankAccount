@@ -8,28 +8,30 @@ using System.Threading.Tasks;
 {
     class BankAccount
     {
+        // parameterless chained constructor
         /// <summary>
         /// Parameterless Constructor that chains from overloaded constructor
         /// </summary>
-        // parameterless chained constructor
         public BankAccount() : this("", 0, 0.0M) { }
+        
+        // overloaded constructor
         /// <summary>
         /// Overloaded constructor that adds Name, Account Number, and balance
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="accountNum"></param>
-        /// <param name="savingsAccountBalanace"></param>
-        // overloaded constructor
+        /// <param name="name">A string</param>
+        /// <param name="accountNum">A interger precision number</param>
+        /// <param name="savingsAccountBalanace">A decimal precision number</param>
         public BankAccount(string name, int accountNum, decimal savingsAccountBalanace)
         {
             Name = name;
             AccountNum = accountNum;
             Balance = savingsAccountBalanace;
         }
+
+        // Name Property
         /// <summary>
         /// Name Property
         /// </summary>
-        // Name Property
         public string Name 
         { 
             get=>_name; 
@@ -37,10 +39,10 @@ using System.Threading.Tasks;
         }
         private string _name; // backing field for name
 
+        // Account Number Property
         /// <summary>
         /// Account Number Property
         /// </summary>
-        // Account Number Property
         public int AccountNum
         {
             get => _accountNum;
@@ -48,10 +50,10 @@ using System.Threading.Tasks;
         }
         private int _accountNum; // backing field for account number
 
+        // Balance Property
         /// <summary>
         /// Balance Property
         /// </summary>
-        // Balance Property
         public decimal Balance 
         { 
             get=>_savingsAccountBalance;
@@ -59,18 +61,18 @@ using System.Threading.Tasks;
         }
         private decimal _savingsAccountBalance; // Balance backing field
 
-       
+        // virtual function Deposit
         /// <summary>
         /// Deposit virtual method that adds the deposit amount to the
         /// Balance
         /// </summary>
-        /// <param name="deposit"></param>
-        // virtual function Deposit
+        /// <param name="deposit">A decimal precision number</param>
         public virtual void Deposit(decimal deposit)
         {
             Balance += deposit;
             
         }
+
         // virtual function Withdraw
         /// <summary>
         /// Check to see if the withdrawl amount will overdraw the account. 
@@ -82,7 +84,7 @@ using System.Threading.Tasks;
         /// which returns "Insufficient funds" if the account will be overdrown with the
         /// requested withdrawl amount from the balance.
         /// </remarks>
-        /// <param name="withdraw"></param>
+        /// <param name="withdraw">A decimal precision number</param>
         /// <returns>"Insufficient funds"</returns>
         /// ///<exception cref="WithrawlExceptionHandle"></exception>
         public virtual void Withdraw(decimal withdraw)

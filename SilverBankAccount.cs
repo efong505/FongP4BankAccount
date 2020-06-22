@@ -9,7 +9,6 @@ namespace FongP4BankAccount
 {
     class SilverBankAccount: BankAccount
     {
-
         // constant FEES variables
         /// <summary>
         /// Constant Fees variables
@@ -22,11 +21,11 @@ namespace FongP4BankAccount
         /// <summary>
         /// Constructor for the SilverBankAccount that Inherits from the base class - BankACcount class
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="accountNum"></param>
-        /// <param name="savingsAccountBalanace"></param>
-        /// <param name="atmAccountNum"></param>
-        /// <param name="pin"></param>
+        /// <param name="name">A string</param>
+        /// <param name="accountNum">An integer precision number</param>
+        /// <param name="savingsAccountBalanace">A decimal precision number</param>
+        /// <param name="atmAccountNum">An integer precision number</param>
+        /// <param name="pin">An integer precision number</param>
         public SilverBankAccount(string name, int accountNum, 
             decimal savingsAccountBalanace, int atmAccountNum, int pin)
                 : base(name, accountNum, savingsAccountBalanace)
@@ -45,21 +44,22 @@ namespace FongP4BankAccount
             set { _atmAccountNum = value; } 
         }
         private int _atmAccountNum;// atmAccountNum backing field
+     
+        // pin properties
         /// <summary>
         /// Pin Property
         /// </summary>
-        // pin properties
         public int Pin {
             get => _pin;
             set { _pin = value; }
         }
         private int _pin;// pin backing field
 
+        // Overriden Deposit Method
         /// <summary>
         /// Overriden Deposit Method from BankAccount class
         /// </summary>
-        /// <param name="deposit"></param>
-        // Overriden Deposit Method
+        /// <param name="deposit">A decimal precision number</param>
         public override void Deposit(decimal deposit)
         {
             if(Balance < 1000)
@@ -77,9 +77,10 @@ namespace FongP4BankAccount
         /// <summary>
         /// Overriden Withraw Method from the BankAccount class
         /// </summary>
-        /// <param name="withdraw"></param>
+        /// <param name="withdraw">A decimal precision number</param>
         /// <returns>"Insufficient funds"</returns>
         ///<exception cref="WithrawlExceptionHandle"></exception>
+        ///See <see cref="WithrawlExceptionHandle"/> to see the WithdrawlExceptionHandle method
         public override void Withdraw(decimal withdraw)
         {
             if (Balance - withdraw - WITHDRAWL_FEE >= 0)
