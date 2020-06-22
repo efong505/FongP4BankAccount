@@ -52,7 +52,8 @@ namespace FongP4BankAccount
         // Deposit bool Property if true then transaction is a deposit
         // if false, withrawl is the transaction
         public bool DepositBool { get; set; }
-        
+
+        // Overriden Withdraw Method
         /// <summary>
         /// Overriden Withdraw method that checks to see if the balance is equal or greater than 20,000. 
         /// If it is then it withdraws the withdrawl amount from the balance without any fees updating the balance
@@ -63,6 +64,8 @@ namespace FongP4BankAccount
         /// If it will, it calls the WithdrawlExcptionHandle class and display, "Insufficient Funds".
         ///</summary>
         /// <param name="withdraw"></param>
+        /// <returns>"Insufficient funds"</returns>
+        ///<exception cref="WithrawlExceptionHandle"></exception>
         public override void Withdraw(decimal withdraw)
         {
             if(Balance >= 20000)

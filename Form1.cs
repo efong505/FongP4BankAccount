@@ -12,11 +12,13 @@ using System.Windows.Forms;
 
 namespace FongP4BankAccount
 {
+    // BankAccountForm class
     /// <summary>
-    /// BankAccountForm inherits from <c>Form</c>
+    /// BankAccountForm class inherits from <c>Form</c>
     /// </summary>
     public partial class BankAccountForm : Form
     {
+        // Error and Success messages strings
         /// <summary>
         /// readonly error string messages for popup and text error and success messages 
         /// </summary>
@@ -29,12 +31,13 @@ namespace FongP4BankAccount
         // Error Message text
         readonly string errorText = "ERROR!!! You have entered in invalid response above";
 
+        // Bank account array to hold 3 account types
         /// <summary>
         /// Bank account array to hold the 3 account types
         /// </summary>
-        // Bank account array to hold 3 account types
         BankAccount[] bankAccount = new BankAccount[3];
         
+        // form initializer
         /// <summary>
         /// form initializer
         /// </summary>
@@ -43,6 +46,7 @@ namespace FongP4BankAccount
             InitializeComponent();
         }
 
+        // Event handler for button update on account tab on the form
         /// <summary>
         /// button update event handler that instantiates the 3 bank types
         /// and handles the entries of the account data information from the user 
@@ -50,7 +54,7 @@ namespace FongP4BankAccount
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        // Event handler for button update on account tab
+
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
             // Create objects for each account type

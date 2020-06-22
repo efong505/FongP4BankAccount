@@ -71,6 +71,7 @@ using System.Threading.Tasks;
             Balance += deposit;
             
         }
+        // virtual function Withdraw
         /// <summary>
         /// Check to see if the withdrawl amount will overdraw the account. 
         /// If the account will not be overdrawn, it subrtracts the withdrawl
@@ -82,7 +83,8 @@ using System.Threading.Tasks;
         /// requested withdrawl amount from the balance.
         /// </remarks>
         /// <param name="withdraw"></param>
-        // virtual function Withdraw
+        /// <returns>"Insufficient funds"</returns>
+        /// ///<exception cref="WithrawlExceptionHandle"></exception>
         public virtual void Withdraw(decimal withdraw)
         {
             if (Balance - withdraw >= 0)
@@ -90,6 +92,8 @@ using System.Threading.Tasks;
             else
                 throw new WithrawlExceptionHandle();
         }
+
+        // Overriden ToString()
         /// <summary>
         /// Overriden custom ToString() method 
         /// </summary>

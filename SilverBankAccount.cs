@@ -9,13 +9,16 @@ namespace FongP4BankAccount
 {
     class SilverBankAccount: BankAccount
     {
+
+        // constant FEES variables
         /// <summary>
         /// Constant Fees variables
         /// </summary>
-        // constant FEES variables
         protected const decimal DEPOSIT_FEE = 1.00M;
         protected const decimal WITHDRAWL_FEE = 2.75M;
 
+        // Constructor for the SilverBankAccount that Inherits from the base 
+        // class - BankACcount class
         /// <summary>
         /// Constructor for the SilverBankAccount that Inherits from the base class - BankACcount class
         /// </summary>
@@ -31,10 +34,11 @@ namespace FongP4BankAccount
             ATMAccountNum = atmAccountNum;
             Pin = pin;
         }
+
+        // atmAccountNum Properties
         /// <summary>
         /// ATM Account Number Property
         /// </summary>
-        // atmAccountNum Properties
         public int ATMAccountNum 
         {
             get => _atmAccountNum;
@@ -68,11 +72,14 @@ namespace FongP4BankAccount
                 Balance += deposit;
             }
         }
+
+        //Overriden Withdrawl Method
         /// <summary>
         /// Overriden Withraw Method from the BankAccount class
         /// </summary>
         /// <param name="withdraw"></param>
-        //Overriden Withdrawl Method
+        /// <returns>"Insufficient funds"</returns>
+        ///<exception cref="WithrawlExceptionHandle"></exception>
         public override void Withdraw(decimal withdraw)
         {
             if (Balance - withdraw - WITHDRAWL_FEE >= 0)
@@ -83,6 +90,8 @@ namespace FongP4BankAccount
             else
                 throw new WithrawlExceptionHandle();
         }
+
+        // Overriden ToString() from BankAccount class w/ ATM Account Num
         /// <summary>
         /// Overriden ToString() from BankAccount class
         /// </summary>
@@ -90,7 +99,6 @@ namespace FongP4BankAccount
         /// Returns the heading ATM: the atm account number and the tostring from 
         /// the BankAccount class
         /// </returns>
-        // Overriden ToString() from BankAccount class w/ ATM Account Num
         public override string ToString()
         {
             return "ATM: " + ATMAccountNum + "\r\n" + base.ToString();
