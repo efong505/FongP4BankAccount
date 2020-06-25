@@ -77,6 +77,11 @@ namespace FongP4BankAccount
             bankAccount[1] = silver;
             bankAccount[2] = gold;
 
+            SilverBankAccount dCSilver = (SilverBankAccount)bankAccount[1];
+            GoldBankAccount dCGold = (GoldBankAccount)bankAccount[2];
+            
+           
+
             // Strings of account number from text box fields on Account Tab on form
             string accountNum = txtAccountNum.Text;
             
@@ -98,18 +103,14 @@ namespace FongP4BankAccount
                         bankAccount[0].AccountNum = accountNumber;
                         
                         // message if valid and instruction to proceed
-                        //IncorrectEntry.Text = ""; 
-                        IncorrectEntry.Visible = false; // hide the error message 
-                        //correctEntryStatus.Text = successMess; // set 
+                        IncorrectEntry.Visible = false; // hide the error message  
                         correctEntryStatus.Visible = true; // Show the success message
                     }
                     // if incorrect display error message in popup
                     else
                     {
                         // error message 
-                        
                         IncorrectEntry.Visible = true;
-                       // correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
@@ -147,24 +148,25 @@ namespace FongP4BankAccount
 
 
                         txtAccountNum.Text = accountNum;
-                       
-
+                        
+                        
                         bankAccount[1].AccountNum = accountNumber;
-                        ((SilverBankAccount)bankAccount[1]).ATMAccountNum = atmAccountNumber;
-                        ((SilverBankAccount)bankAccount[1]).Pin = atmPinNum;
+
+                        dCSilver.ATMAccountNum = atmAccountNumber;
+                        dCSilver.Pin = atmPinNum;
+
+                        // TODO:First way downcasted SilverBankAccount
+                        //((SilverBankAccount)bankAccount[1]).ATMAccountNum = atmAccountNumber;
+                        //((SilverBankAccount)bankAccount[1]).Pin = atmPinNum;
                         
                         // message on status of entries made
-                        //IncorrectEntry.Text = "";
                         IncorrectEntry.Visible = false;
-                        //correctEntryStatus.Text = successMess;
                         correctEntryStatus.Visible = true;
                     }
                     else
                     {
                         // message if incorrect entries
-                        //IncorrectEntry.Text = errorText;
                         IncorrectEntry.Visible = true;
-                        //correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
@@ -181,7 +183,6 @@ namespace FongP4BankAccount
                     bankAccount[2].Name = txtBName.Text;
 
                     // Strings of numbers from text box fields
-                    
                     atmAccountNum = txtBATMAcctNum.Text;
                     atmPin = txtBATMPin.Text;
                     string intRte = txtBInterstRate.Text;
@@ -200,23 +201,25 @@ namespace FongP4BankAccount
                         // Checks for TryParse
                         Int32.TryParse(accountNum, out accountNumber);
 
+                        dCGold.ATMAccountNum = accountNumber;
+                        dCGold.Pin = atmPinNum;
+                        dCGold.Interest = interestRate;
+
                         bankAccount[2].AccountNum = accountNumber;
-                        ((GoldBankAccount)bankAccount[2]).ATMAccountNum = atmAccountNumber;
-                        ((GoldBankAccount)bankAccount[2]).Pin = atmPinNum;
-                        ((GoldBankAccount)bankAccount[2]).Interest = interestRate;
+
+                        //TODO: 1st way downcasted for GoldBankAccount
+                        //((GoldBankAccount)bankAccount[2]).ATMAccountNum = atmAccountNumber;
+                        //((GoldBankAccount)bankAccount[2]).Pin = atmPinNum;
+                        //((GoldBankAccount)bankAccount[2]).Interest = interestRate;
                         
                         // entries if entered correctly
-                        //IncorrectEntry.Text = "";
                         IncorrectEntry.Visible = false;
-                        //correctEntryStatus.Text = successMess;
                         correctEntryStatus.Visible = true;
                     }
                     else
                     {
                         //message if entries entered incorrectly
-                        //IncorrectEntry.Text = errorText;
                         IncorrectEntry.Visible = true;
-                       // correctEntryStatus.Text = "";
                         correctEntryStatus.Visible = false;
 
                         // Popup that displays error message
