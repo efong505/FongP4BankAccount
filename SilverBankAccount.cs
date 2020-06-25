@@ -83,10 +83,12 @@ namespace FongP4BankAccount
         ///See <see cref="WithrawlExceptionHandle"/> to see the WithdrawlExceptionHandle method
         public override void Withdraw(decimal withdraw)
         {
+            // check if amount will overdrwaw account, if not then proeed
             if (Balance - withdraw - WITHDRAWL_FEE >= 0)
             {
                 Balance -= WITHDRAWL_FEE;
-                Balance -= withdraw;
+                base.Withdraw(withdraw);
+               // Balance -= withdraw;
             }
             else
                 throw new WithrawlExceptionHandle();

@@ -51,7 +51,9 @@ namespace FongP4BankAccount
         // Deposit bool Property 
         /// <summary>
         /// DepositBool boolean checks if the transaction is a deposit or if it's a withdrawl.
-        /// If the boolean returns true then it's a Deposit. False, it's a Withdrawl.
+        /// If the boolean returns true then it's a Deposit. False, it's a Withdrawl. This 
+        /// tells the ToString() to print the interest statement for the deposit and omits it 
+        /// when it's a withdrawl.
         /// </summary>
         public bool DepositBool { get; set; }
 
@@ -73,14 +75,14 @@ namespace FongP4BankAccount
             if(Balance >= 20000)
             {
                 Balance -= withdraw;
-                DepositBool = false;
+                DepositBool = false; // set deposit bool withdraw(false)
             }
             else
             {
                 if (Balance - withdraw - WITHDRAWL_FEE >= 0)
                 {
                     base.Withdraw(withdraw); 
-                    DepositBool = false;
+                    DepositBool = false;// set deposit bool withdraw(false)
                 }
                 else
                     throw new WithrawlExceptionHandle();
@@ -100,13 +102,13 @@ namespace FongP4BankAccount
             {
                 Balance += Balance * Interest; // add interest to balance
                 Balance += deposit;
-                DepositBool = true;
+                DepositBool = true; // set deposit bool to Deposit(true)
             }
             else
             {
                 //Balance += DepositProp;
                 base.Deposit(deposit);
-                DepositBool = true;
+                DepositBool = true;// set deposit bool to Deposit(true)
             }
         }
 
