@@ -74,20 +74,23 @@ namespace FongP4BankAccount
         {
             if(Balance >= 20000)
             {
-                Balance -= withdraw;
+                withdraw += 2.5M;
+                base.Withdraw(withdraw);
+               // Balance -= withdraw;
                 DepositBool = false; // set deposit bool withdraw(false)
             }
-            else
-            {
-                if (Balance - withdraw - WITHDRAWL_FEE >= 0)
-                {
-                    base.Withdraw(withdraw); 
-                    DepositBool = false;// set deposit bool withdraw(false)
-                }
-                else
-                    throw new WithrawlExceptionHandle();
+            //else
+            //{
+            //    if (Balance - withdraw - WITHDRAWL_FEE >= 0)
+            //    {
+            //        base.Withdraw(withdraw); 
+            //       // DepositBool = false;// set deposit bool withdraw(false)
+            //    }
+                //else
+                //    throw new WithrawlExceptionHandle();
+              
 
-            }
+            //}
         }
 
         // Overriden Deposit Method
@@ -98,18 +101,23 @@ namespace FongP4BankAccount
         /// <param name="deposit"></param>
         public override void Deposit(decimal deposit)
         {
-            if(Balance >= 5000)
+            //TODO:  Don't do the transaction here, do it in the base class
+            if (Balance >= 5000)
             {
+                if(Balance > 20000)
+                    deposit += 1.0M;
                 Balance += Balance * Interest; // add interest to balance
-                Balance += deposit;
-                DepositBool = true; // set deposit bool to Deposit(true)
+               // Balance += deposit;
+               // DepositBool = true; // set deposit bool to Deposit(true)
             }
-            else
-            {
-                //Balance += DepositProp;
-                base.Deposit(deposit);
-                DepositBool = true;// set deposit bool to Deposit(true)
-            }
+
+            base.Deposit(deposit);
+            //else
+            //{
+            //    //Balance += DepositProp;
+            //    base.Deposit(deposit);
+            //    DepositBool = true;// set deposit bool to Deposit(true)
+            //}
         }
 
         // Overriden ToString()
