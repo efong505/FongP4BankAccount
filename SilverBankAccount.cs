@@ -62,15 +62,18 @@ namespace FongP4BankAccount
         /// <param name="deposit">A decimal precision number</param>
         public override void Deposit(decimal deposit)
         {
+            //TODO:  Don't do the transaction here, do it in the base class
+
             if(Balance < 1000)
             {
                 Balance -= DEPOSIT_FEE;
-                Balance += deposit;
+               // Balance += deposit;
             }
-            else
-            {
-                Balance += deposit;
-            }
+            base.Deposit(Balance);
+            //else
+            //{
+            //    Balance += deposit;
+            //}
         }
 
         //Overriden Withdrawl Method
@@ -83,15 +86,18 @@ namespace FongP4BankAccount
         ///See <see cref="WithrawlExceptionHandle"/> to see the WithdrawlExceptionHandle method
         public override void Withdraw(decimal withdraw)
         {
+            //TODO:  Once you use the case class method, it handles throwing
+            //TODO:   the exception
             // check if amount will overdrwaw account, if not then proeed
-            if (Balance - withdraw - WITHDRAWL_FEE >= 0)
-            {
-                Balance -= WITHDRAWL_FEE;
+            // if (Balance - withdraw - WITHDRAWL_FEE >= 0)
+            // {
+            withdraw += WITHDRAWL_FEE;
+               // Balance -= WITHDRAWL_FEE;
                 base.Withdraw(withdraw);
                // Balance -= withdraw;
-            }
-            else
-                throw new WithrawlExceptionHandle();
+           // }
+            //else
+            //    throw new WithrawlExceptionHandle();
         }
 
         // Overriden ToString() from BankAccount class w/ ATM Account Num

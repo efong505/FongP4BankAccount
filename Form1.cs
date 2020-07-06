@@ -8,7 +8,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+//TODO:  You are doing all of the deposit/withdraw -5
+//TODO:  transactions in the derived classes.  The inheritance idea is to 
+//TODO:  let the base class, which has already the "basic" functionality do it.
+//TODO:  The only things calculated by the derived classes are the fees.
+//TODO:  That is why you keep on throwing the exceptions in each class.
+//TODO:  You never get to the base class to let it throw it.
 
 namespace FongP4BankAccount
 {
